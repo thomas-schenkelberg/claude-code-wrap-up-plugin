@@ -1,0 +1,10 @@
+{
+  "name": "wrap-up",
+  "version": "1.0.0",
+  "description": "End-of-session wrap-up routine for Claude Code. Commits touched repos, updates tracker/PRD/AGENTS.md/CLAUDE.md if useful, and reviews the session for durable memory writes.",
+  "author": "tschenkster",
+  "license": "MIT",
+  "homepage": "https://github.com/tschenkster/claude-code-wrap-up-skill",
+  "repository": "https://github.com/tschenkster/claude-code-wrap-up-skill",
+  "keywords": ["claude-code", "skill", "wrap-up", "git", "session", "workflow"]
+}
