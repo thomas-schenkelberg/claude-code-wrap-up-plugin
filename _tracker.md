@@ -9,6 +9,7 @@
 - [x] 2026-05-12: v1.2.0 — make `_tracker.md` and `_prd.md` mandatory in `/wrap-up` (auto-create if missing)
 - [x] 2026-05-12: Fix README — plugin update needs two commands (`marketplace update` then `plugin update`)
 - [x] 2026-05-12: v1.3.0 — make `AGENTS.md` + `CLAUDE.md` mandatory too; inline starters into `wrap-up` Appendices A–D; remove `templates/`; repo dogfoods its own convention; README states plugin-vs-skill + benefits
+- [x] 2026-05-12: Attribution — LICENSE/plugin.json/marketplace.json/README/AGENTS.md now carry `tschenkster (Thomas Schenkelberg | linkedin.com/in/thomas-schenkelberg)`
 
 ## Next
 

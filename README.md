@@ -178,6 +178,10 @@ The two procedures are packaged as **skills** rather than `commands/*.md` files 
 
 ---
 
+## Author
+
+Built and maintained by **tschenkster — Thomas Schenkelberg** ([LinkedIn](https://www.linkedin.com/in/thomas-schenkelberg/)), a fractional CFO who helps tech companies put AI to work in finance operations. If this is useful to your team, that's the day job.
+
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](./LICENSE). Copyright (c) 2026 tschenkster (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/).

@@ -2,6 +2,8 @@
 
 > Project instructions for any coding agent working on this repo. This repo deliberately follows the convention its own plugin enforces — hence this file plus `CLAUDE.md`, `_tracker.md`, and `_prd.md` at the root.
 
+**Maintainer:** tschenkster (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/). MIT licensed.
+
 ## What this project is
 
 A **Claude Code plugin** named `wrap-up`, published to GitHub and installable via the Claude Code plugin/marketplace system. The plugin bundles **two skills** (each a `/<name>` slash command):
