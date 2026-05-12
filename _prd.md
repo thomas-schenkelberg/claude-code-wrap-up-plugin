@@ -1,4 +1,4 @@
-# PRD — claude-code-wrap-up-skill
+# PRD: claude-code-wrap-up-plugin
 
 > Product requirements for the `wrap-up` Claude Code plugin. Updated when scope or architecture changes — not for routine wording tweaks.
 
@@ -38,7 +38,7 @@ End-of-session hygiene is easy to skip: people forget to commit and push, projec
 
 - **Plain-Markdown skills**, no runtime. Claude reads `SKILL.md` and executes it as a procedure. `disable-model-invocation: true` on both — they only run on the explicit slash command.
 - **`.claude-plugin/marketplace.json`** — marketplace catalog (one plugin entry, `source: ./`). **`.claude-plugin/plugin.json`** — plugin manifest; the semver `version` lives here and is how installed users know to update.
-- **Distribution**: GitHub repo `tschenkster/claude-code-wrap-up-skill` acts as the marketplace; users `add` it then `install wrap-up@wrap-up`.
+- **Distribution**: GitHub repo `tschenkster/claude-code-wrap-up-plugin` acts as the marketplace; users `add` it then `install wrap-up@wrap-up`. (Repo renamed from `claude-code-wrap-up-skill` on 2026-05-12; GitHub redirects the old URL.)
 - **Self-contained skills**: the four starter file bodies are inlined into `skills/wrap-up/SKILL.md` (Appendices A–D); `skills/init-project/SKILL.md` references them. No external files to locate.
 - **Dogfooding**: this repo carries its own `_tracker.md`, `_prd.md`, `AGENTS.md`, `CLAUDE.md` at the root.
 

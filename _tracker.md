@@ -1,4 +1,4 @@
-# Tracker — claude-code-wrap-up-skill
+# Tracker: claude-code-wrap-up-plugin
 
 > One-line entries. Max ~100 lines total. Detail belongs in commit messages or `_prd.md` — not here.
 
@@ -10,6 +10,7 @@
 - [x] 2026-05-12: Fix README — plugin update needs two commands (`marketplace update` then `plugin update`)
 - [x] 2026-05-12: v1.3.0 — make `AGENTS.md` + `CLAUDE.md` mandatory too; inline starters into `wrap-up` Appendices A–D; remove `templates/`; repo dogfoods its own convention; README states plugin-vs-skill + benefits
 - [x] 2026-05-12: Attribution — LICENSE/plugin.json/marketplace.json/README/AGENTS.md now carry `tschenkster (Thomas Schenkelberg | linkedin.com/in/thomas-schenkelberg)`
+- [x] 2026-05-12: Rename repo `claude-code-wrap-up-skill` → `claude-code-wrap-up-plugin`; README rewritten for non-technical / business readers
 
 ## Next
 

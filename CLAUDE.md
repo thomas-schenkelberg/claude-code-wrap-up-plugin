@@ -1,4 +1,4 @@
-# CLAUDE.md — claude-code-wrap-up-skill
+# CLAUDE.md: claude-code-wrap-up-plugin
 
 @AGENTS.md
 

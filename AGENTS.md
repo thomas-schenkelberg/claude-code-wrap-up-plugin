@@ -1,4 +1,4 @@
-# AGENTS.md — claude-code-wrap-up-skill
+# AGENTS.md: claude-code-wrap-up-plugin
 
 > Project instructions for any coding agent working on this repo. This repo deliberately follows the convention its own plugin enforces — hence this file plus `CLAUDE.md`, `_tracker.md`, and `_prd.md` at the root.
 
@@ -30,7 +30,7 @@ The starter content for the four project files is **inlined into `skills/wrap-up
 
 1. In a scratch project directory, point Claude Code at this repo as a marketplace:
    ```
-   /plugin marketplace add /absolute/path/to/claude-code-wrap-up-skill
+   /plugin marketplace add /absolute/path/to/claude-code-wrap-up-plugin
    /plugin install wrap-up@wrap-up
    ```
 2. Exercise the skills in a throwaway folder:
