@@ -1,7 +1,7 @@
 {
   "name": "wrap-up",
-  "version": "1.1.0",
-  "description": "End-of-session /wrap-up + project bootstrap /init-project for Claude Code. Wraps a session by committing touched repos and updating tracker/PRD/AGENTS.md/CLAUDE.md; bootstraps new projects with starter scaffolding.",
+  "version": "1.2.0",
+  "description": "End-of-session /wrap-up + project bootstrap /init-project for Claude Code. /wrap-up commits touched repos and updates tracker/PRD (mandatory, auto-created from templates if missing) plus optional AGENTS.md/CLAUDE.md. /init-project seeds all four files at project start.",
   "author": "tschenkster",
   "license": "MIT",
   "homepage": "https://github.com/tschenkster/claude-code-wrap-up-skill",

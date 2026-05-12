@@ -59,9 +59,9 @@ Claude runs the 6-step procedure. You don't need to confirm individual steps —
 
 1. **Commit & push the git repos you touched this session.** Resolves repo roots from the files you actually edited, stages only those files (never `git add -A`), filters out anything that looks like a secret (`.env*`, `*.pem`, service-role keys, etc.), commits with a concise message, and pushes. On push failure, reports and moves on — never force-pushes, never bypasses hooks.
 
-2. **Update `_tracker.md`** (if present). Moves completed items to "Done" with today's date, adds new items discovered this session, keeps entries one-line and under ~80 chars, and trims the file back under ~100 lines if it's grown too long.
+2. **Update `_tracker.md` (mandatory).** If the file does not exist, it is auto-created from the bundled template. Then: moves completed items to "Done" with today's date, adds new items discovered this session, keeps entries one-line and under ~80 chars, and trims the file back under ~100 lines if it's grown too long.
 
-3. **Update `_prd.md`** (if present, and only if architecture/scope changed).
+3. **Update `_prd.md` (mandatory).** If the file does not exist, it is auto-created from the bundled template. Then: only edits the file if architecture/scope changed this session.
 
 4. **Update `AGENTS.md`** (if present, and only if a new tool/workflow/structure rule was introduced).
 
@@ -69,7 +69,7 @@ Claude runs the 6-step procedure. You don't need to confirm individual steps —
 
 6. **Update `CLAUDE.md`** (if present, and only if conventions or phase status changed).
 
-Each step is conservative: if nothing meaningful changed, or the relevant file doesn't exist, the step says "no update needed" and moves on.
+Steps 2 and 3 are mandatory — `_tracker.md` and `_prd.md` are always present after a `/wrap-up` run. Steps 4 and 6 are conservative: if `AGENTS.md` / `CLAUDE.md` doesn't exist or nothing meaningful changed, the step says "no update needed" and moves on. (Use `/init-project` to seed all four files at once.)
 
 ---
 
@@ -92,16 +92,16 @@ If the directory is not a git repo, the skill suggests `git init` so `/wrap-up` 
 
 ## Conventions this skill expects
 
-`/wrap-up` looks for these four files at the project root. None are required — each step skips itself if the relevant file is missing. `/init-project` exists to seed them in one step.
+`/wrap-up` looks for these four files at the project root. `_tracker.md` and `_prd.md` are mandatory and auto-created from templates if missing. `AGENTS.md` and `CLAUDE.md` are optional — if absent, those steps no-op. `/init-project` exists to seed all four in one step at project start.
 
 | File at project root | Purpose | `/wrap-up` behavior if missing |
 |---|---|---|
-| `_tracker.md` | One-line `Done` / `Next` / `Ideas` changelog | Step 2 skips |
-| `_prd.md` | Product/spec doc | Step 3 skips |
+| `_tracker.md` | One-line `Done` / `Next` / `Ideas` changelog | **auto-created from template** |
+| `_prd.md` | Product/spec doc | **auto-created from template** |
 | `AGENTS.md` | Cross-agent project instructions | Step 4 skips |
 | `CLAUDE.md` | Claude-specific project instructions | Step 6 skips |
 
-If you keep your tracker / PRD elsewhere (or not at all), just leave the corresponding file absent and those steps no-op.
+If you don't want a tracker or PRD on a given project, don't run `/wrap-up` there — they're non-negotiable for any project that uses this skill.
 
 ---
 

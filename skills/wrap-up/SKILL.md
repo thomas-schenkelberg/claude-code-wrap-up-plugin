@@ -1,10 +1,12 @@
 ---
 name: wrap-up
-description: End-of-session wrap-up. Commits touched repos, updates _tracker.md / _prd.md / AGENTS.md / CLAUDE.md if useful, and reviews the session for durable memory writes. Invoke explicitly via /wrap-up.
+description: End-of-session wrap-up. Commits touched repos, ensures _tracker.md and _prd.md exist (auto-creates from templates if missing) and updates them, optionally updates AGENTS.md / CLAUDE.md, and reviews the session for durable memory writes. Invoke explicitly via /wrap-up.
 disable-model-invocation: true
 ---
 
 End-of-session wrap-up. Run all 6 steps below in order.
+
+**Mandatory files:** `_tracker.md` and `_prd.md` MUST exist at the project root after `/wrap-up` runs. Steps 2 and 3 auto-create them from the bundled templates if missing — they never skip on the grounds that the file is absent.
 
 ## Step 1: Commit and push the git repos touched this session
 
@@ -28,9 +30,13 @@ Do not sweep the whole filesystem. Commit only the repos that were actually touc
 
 **Never commit:** anything under `~/.claude/`, or files in directories that are not git repos (cloud-sync folders without a `.git`, scratch dirs, etc.).
 
-## Step 2: Update Tracker (if useful)
+## Step 2: Update Tracker (mandatory)
 
-- Read `_tracker.md` at the project root and review what was done this session (from the commits and git log).
+- **Required file: `_tracker.md` at the project root.** If it does not exist, create it now from the bundled template at `templates/_tracker.md` (relative to the plugin root — two levels up from this `SKILL.md`). When seeding:
+  - Replace `{{PROJECT_NAME}}` with the basename of the current working directory.
+  - Replace the placeholder date `YYYY-MM-DD` in the seed "Project scaffolding" entry with today's date.
+  - Print `_tracker.md: created from template` and continue with the update steps below.
+- Read `_tracker.md` and review what was done this session (from the commits and git log).
 - **Move completed items** from "Next" to "Done" with today's date. **Add new items** discovered this session to "Next" or "Ideas". **Reprioritize "Next"** if the session changed what matters most.
 - **Entry style — match a git commit subject line:** one line, under ~80 characters, imperative or past-tense, no multi-sentence explanations, no "Verified: ..." tails, no architecture context. If it wouldn't fit on `git log --oneline`, it's too long.
   - Good: `- [x] 2026-05-01: Add OAuth login flow to admin app`
@@ -38,17 +44,21 @@ Do not sweep the whole filesystem. Commit only the repos that were actually touc
   - Bad: `- [x] Auth v1 — M1 hardening: token introspection in _shared/verify-token.js, wired checkAuth() into 3 handlers, secrets moved to vault. Verified: invalid token → 401. (2026-05-01)`
 - If a change genuinely needs longer context, write it to memory or the commit message — the tracker is a changelog, not a narrative.
 - **Size cap ~100 lines.** Before adding new entries, `wc -l _tracker.md`. If over 100, collapse older multi-line Done entries to one-liners (or fold pure-scaffolding entries into a single "Project scaffolding (YYYY-MM-DD)" line) until back under the cap. Do not delete history — `git log` is the durable record.
-- **Skip** if no `_tracker.md` exists or nothing changed worth recording. Say "Tracker: no update needed" and move on.
+- **Never skip on the grounds that the file is missing** — create it. The only "no update needed" path is when `_tracker.md` already exists AND nothing this session is worth recording. Say "Tracker: no update needed" only in that case.
 
-## Step 3: Update PRD (if useful)
+## Step 3: Update PRD (mandatory)
 
-- Read `_prd.md` at the project root and check what changed this session.
+- **Required file: `_prd.md` at the project root.** If it does not exist, create it now from the bundled template at `templates/_prd.md` (relative to the plugin root). When seeding:
+  - Replace `{{PROJECT_NAME}}` with the basename of the current working directory.
+  - Print `_prd.md: created from template` and continue with the update check below.
+  - Flag to the user: "Seed PRD created — fill in Problem, Users, Scope, Success criteria when you have a moment."
+- Read `_prd.md` and check what changed this session.
 - **Only update** if there were substantive changes worth reflecting in the PRD:
   - Phase status changed (e.g., a phase completed)
   - New features or capabilities added
   - Architecture decisions that affect the spec
   - Version bump warranted
-- **Skip** for routine bug fixes, style tweaks, or minor refactors, or if no `_prd.md` exists. Say "PRD: no update needed" and move on.
+- **Never skip on the grounds that the file is missing** — create it. For routine bug fixes, style tweaks, or minor refactors, you may say "PRD: no update needed" — but the file must exist after this step.
 
 ## Step 4: Update AGENTS.md (if useful)
 
