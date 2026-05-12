@@ -7,7 +7,7 @@
     {
       "name": "wrap-up",
       "source": "./",
-      "description": "End-of-session /wrap-up (commit touched repos, update tracker/PRD/AGENTS.md/CLAUDE.md, review for memory) plus /init-project (scaffold a new project with the four files /wrap-up expects)."
+      "description": "Two skills: /wrap-up ends a session — commits touched repos, ensures + updates the four mandatory project files (_tracker.md, _prd.md, AGENTS.md, CLAUDE.md; auto-created from inline starters if missing), reviews for memory. /init-project seeds those four files interactively at project start."
     }
   ]
 }
