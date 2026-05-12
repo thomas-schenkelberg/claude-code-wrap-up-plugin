@@ -20,11 +20,14 @@ That's it. Both `/init-project` and `/wrap-up` are now available in every projec
 
 > **Note:** Claude Code requires a marketplace before installing a plugin. The marketplace name and the plugin name are both `wrap-up` — the install command literally reads "install plugin `wrap-up` from marketplace `wrap-up`."
 
-To update later:
+To update later (two commands — works identically in the CLI and the VS Code extension):
 
 ```
-/plugin marketplace update wrap-up
+/plugin marketplace update wrap-up        # refresh the marketplace catalog
+/plugin update wrap-up@wrap-up            # upgrade the installed plugin
 ```
+
+The first command alone only refreshes what's *available*; it does not upgrade the installed copy. If Claude Code prompts you afterwards, run `/reload-plugins` to pick up the new version in the current session.
 
 To uninstall:
 
