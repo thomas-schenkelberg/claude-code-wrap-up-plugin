@@ -1,10 +1,10 @@
 {
   "name": "wrap-up",
-  "version": "1.0.0",
-  "description": "End-of-session wrap-up routine for Claude Code. Commits touched repos, updates tracker/PRD/AGENTS.md/CLAUDE.md if useful, and reviews the session for durable memory writes.",
+  "version": "1.1.0",
+  "description": "End-of-session /wrap-up + project bootstrap /init-project for Claude Code. Wraps a session by committing touched repos and updating tracker/PRD/AGENTS.md/CLAUDE.md; bootstraps new projects with starter scaffolding.",
   "author": "tschenkster",
   "license": "MIT",
   "homepage": "https://github.com/tschenkster/claude-code-wrap-up-skill",
   "repository": "https://github.com/tschenkster/claude-code-wrap-up-skill",
-  "keywords": ["claude-code", "skill", "wrap-up", "git", "session", "workflow"]
+  "keywords": ["claude-code", "skill", "wrap-up", "init-project", "scaffolding", "tracker", "prd", "git", "session", "workflow"]
 }

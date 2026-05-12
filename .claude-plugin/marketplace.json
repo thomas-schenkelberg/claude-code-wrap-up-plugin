@@ -7,7 +7,7 @@
     {
       "name": "wrap-up",
       "source": "./",
-      "description": "End-of-session wrap-up: commit touched repos, update tracker/PRD/AGENTS.md, review for memory, update CLAUDE.md."
+      "description": "End-of-session /wrap-up (commit touched repos, update tracker/PRD/AGENTS.md/CLAUDE.md, review for memory) plus /init-project (scaffold a new project with the four files /wrap-up expects)."
     }
   ]
 }
