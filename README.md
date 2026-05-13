@@ -29,7 +29,7 @@ All of that happens when you type one thing: `/wrap-up`.
 Open Claude Code and paste these two commands:
 
 ```
-/plugin marketplace add tschenkster/claude-code-wrap-up-plugin
+/plugin marketplace add thomas-schenkelberg/claude-code-wrap-up-plugin
 /plugin install wrap-up@wrap-up
 ```
 
@@ -92,7 +92,7 @@ Installing without `/plugin` (for example, in a managed agent like Cowork): copy
 
 To change what a freshly-created `_tracker.md` / `_prd.md` / `AGENTS.md` / `CLAUDE.md` looks like, edit Appendices A-D in `skills/wrap-up/SKILL.md` (and nowhere else - `/init-project` reads the same blocks).
 
-> This repository was renamed from `claude-code-wrap-up-skill` to `claude-code-wrap-up-plugin` on 2026-05-12. GitHub redirects the old URL, so an existing install via the old name keeps working; new installs should use the name above.
+> Repository history: created at `tschenkster/claude-code-wrap-up-skill` (2026-05-01), renamed to `claude-code-wrap-up-plugin` (2026-05-12), transferred to the `thomas-schenkelberg` GitHub Org (2026-05-13). GitHub redirects every prior URL automatically — existing installs via any old name keep working. New installs should use `thomas-schenkelberg/claude-code-wrap-up-plugin`.
 
 ---
 

@@ -4,7 +4,7 @@
   "description": "Claude Code plugin bundling two skills. /wrap-up ends a session: commits touched repos, then ensures and updates the four project files (_tracker.md, _prd.md, AGENTS.md, CLAUDE.md — all mandatory, auto-created from inline starters if missing), then reviews the session for memory writes. /init-project seeds those same four files interactively at project start. Self-contained, plain Markdown, no runtime.",
   "author": "tschenkster (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/)",
   "license": "MIT",
-  "homepage": "https://github.com/tschenkster/claude-code-wrap-up-plugin",
-  "repository": "https://github.com/tschenkster/claude-code-wrap-up-plugin",
+  "homepage": "https://github.com/thomas-schenkelberg/claude-code-wrap-up-plugin",
+  "repository": "https://github.com/thomas-schenkelberg/claude-code-wrap-up-plugin",
   "keywords": ["claude-code", "plugin", "wrap-up", "init-project", "scaffolding", "tracker", "prd", "git", "session", "workflow"]
 }
