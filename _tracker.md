@@ -12,6 +12,7 @@
 - [x] 2026-05-12: Attribution — LICENSE/plugin.json/marketplace.json/README/AGENTS.md now carry `tschenkster (Thomas Schenkelberg | linkedin.com/in/thomas-schenkelberg)`
 - [x] 2026-05-12: Rename repo `claude-code-wrap-up-skill` → `claude-code-wrap-up-plugin`; README rewritten for non-technical / business readers
 - [x] 2026-05-13: Transfer repo to `thomas-schenkelberg` GitHub Org; install URL is now `thomas-schenkelberg/...`; old URL redirects
+- [x] 2026-05-13: Move local clone from `~/Code/` to `15-tools/`; register in `15-tools/REGISTRY-TOOLS.md`
 
 ## Next
 
