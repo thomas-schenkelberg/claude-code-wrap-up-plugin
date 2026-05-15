@@ -13,6 +13,7 @@
 - [x] 2026-05-12: Rename repo `claude-code-wrap-up-skill` → `claude-code-wrap-up-plugin`; README rewritten for non-technical / business readers
 - [x] 2026-05-13: Transfer repo to `thomas-schenkelberg` GitHub Org; install URL is now `thomas-schenkelberg/...`; old URL redirects
 - [x] 2026-05-13: Move local clone from `~/Code/` to `15-tools/`; register in `15-tools/REGISTRY-TOOLS.md`
+- [x] 2026-05-15: v1.3.1 — fix `plugin.json` schema; `author` now object (was string), required by Claude Code v2.1.142+ install validation
 
 ## Next
 
