@@ -31,15 +31,15 @@ The starter content for the four project files is **inlined into `skills/wrap-up
 1. In a scratch project directory, point Claude Code at this repo as a marketplace:
    ```
    /plugin marketplace add /absolute/path/to/claude-code-wrap-up-plugin
-   /plugin install wrap-up@wrap-up
+   /plugin install wrap-up@thomas-schenkelberg
    ```
 2. Exercise the skills in a throwaway folder:
    - `/wrap-up` in a bare (non-git) folder → should create `_tracker.md`, `_prd.md`, `AGENTS.md`, `CLAUDE.md` (project name = the folder basename), commit nothing, and print a clean summary.
    - `git init`, then `/init-project` → should prompt for a project name and create the four files; re-running it should report all four "already exists — skipped".
 3. Uninstall when done:
    ```
-   /plugin uninstall wrap-up@wrap-up
-   /plugin marketplace remove wrap-up
+   /plugin uninstall wrap-up@thomas-schenkelberg
+   /plugin marketplace remove thomas-schenkelberg
    ```
 
 ## How to publish a new version
@@ -48,7 +48,7 @@ The starter content for the four project files is **inlined into `skills/wrap-up
 2. Bump `version` in `.claude-plugin/plugin.json` (semver). Keep `.claude-plugin/marketplace.json`'s description in sync if it changed.
 3. Update `README.md` — especially the "What `/wrap-up` does" list and the behavior table — and add a line to `_tracker.md`.
 4. Commit with the standard Claude Code co-author trailer and push to `main`.
-5. Installed users update with: `/plugin marketplace update wrap-up` then `/plugin update wrap-up@wrap-up`.
+5. Installed users update with: `/plugin marketplace update thomas-schenkelberg` then `/plugin update wrap-up@thomas-schenkelberg`.
 
 ## Conventions
 

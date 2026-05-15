@@ -30,7 +30,7 @@ Open Claude Code and paste these two commands:
 
 ```
 /plugin marketplace add thomas-schenkelberg/claude-code-wrap-up-plugin
-/plugin install wrap-up@wrap-up
+/plugin install wrap-up@thomas-schenkelberg
 ```
 
 That's the whole setup. From now on, `/init-project` and `/wrap-up` work in every project.
@@ -38,11 +38,11 @@ That's the whole setup. From now on, `/init-project` and `/wrap-up` work in ever
 To pick up a newer version later:
 
 ```
-/plugin marketplace update wrap-up
-/plugin update wrap-up@wrap-up
+/plugin marketplace update thomas-schenkelberg
+/plugin update wrap-up@thomas-schenkelberg
 ```
 
-To remove it: `/plugin uninstall wrap-up@wrap-up` then `/plugin marketplace remove wrap-up`.
+To remove it: `/plugin uninstall wrap-up@thomas-schenkelberg` then `/plugin marketplace remove thomas-schenkelberg`.
 
 ---
 

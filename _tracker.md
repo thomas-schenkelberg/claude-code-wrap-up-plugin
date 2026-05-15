@@ -14,6 +14,7 @@
 - [x] 2026-05-13: Transfer repo to `thomas-schenkelberg` GitHub Org; install URL is now `thomas-schenkelberg/...`; old URL redirects
 - [x] 2026-05-13: Move local clone from `~/Code/` to `15-tools/`; register in `15-tools/REGISTRY-TOOLS.md`
 - [x] 2026-05-15: v1.3.1 — fix `plugin.json` schema; `author` now object (was string), required by Claude Code v2.1.142+ install validation
+- [x] 2026-05-15: Rename marketplace `wrap-up` → `thomas-schenkelberg` (install is now `wrap-up@thomas-schenkelberg`); existing users must `marketplace remove wrap-up` + re-add (cache keyed on name)
 
 ## Next
 
