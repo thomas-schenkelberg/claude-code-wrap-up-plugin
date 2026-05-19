@@ -29,11 +29,11 @@ All of that happens when you type one thing: `/wrap-up`.
 Open Claude Code and paste these two commands:
 
 ```
-/plugin marketplace add thomas-schenkelberg/claude-code-wrap-up-plugin
+/plugin marketplace add thomas-schenkelberg/marketplace
 /plugin install wrap-up@thomas-schenkelberg
 ```
 
-That's the whole setup. From now on, `/init-project` and `/wrap-up` work in every project.
+That's the whole setup. From now on, `/init-project` and `/wrap-up` work in every project. The same marketplace will carry any future plugins I publish, so you only do this once.
 
 To pick up a newer version later:
 
@@ -43,6 +43,8 @@ To pick up a newer version later:
 ```
 
 To remove it: `/plugin uninstall wrap-up@thomas-schenkelberg` then `/plugin marketplace remove thomas-schenkelberg`.
+
+**Migrating from the old install path?** If you previously added this repo directly (`/plugin marketplace add thomas-schenkelberg/claude-code-wrap-up-plugin`), switch once: `/plugin marketplace remove thomas-schenkelberg`, then the two install lines above.
 
 ---
 
@@ -86,13 +88,13 @@ I'm Thomas - a fractional CFO who helps tech companies put AI to work in finance
 
 ## Under the hood (for developers)
 
-The plugin is two Markdown "skills" - `skills/wrap-up/SKILL.md` (the `/wrap-up` procedure, with the four starter file bodies as Appendices A-D) and `skills/init-project/SKILL.md` - packaged via `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json`. No JavaScript, no hooks, no MCP server: Claude reads the Markdown and follows it. The repo dogfoods its own convention (it carries `_tracker.md` / `_prd.md` / `AGENTS.md` / `CLAUDE.md` at the root); see [`AGENTS.md`](./AGENTS.md) for how to test locally and publish a version.
+The plugin is two Markdown "skills" - `skills/wrap-up/SKILL.md` (the `/wrap-up` procedure, with the four starter file bodies as Appendices A-D) and `skills/init-project/SKILL.md` - packaged via `.claude-plugin/plugin.json`. The marketplace listing lives in a separate repo, [`thomas-schenkelberg/marketplace`](https://github.com/thomas-schenkelberg/marketplace), which catalogues this plugin (and any future ones). No JavaScript, no hooks, no MCP server: Claude reads the Markdown and follows it. The repo dogfoods its own convention (it carries `_tracker.md` / `_prd.md` / `AGENTS.md` / `CLAUDE.md` at the root); see [`AGENTS.md`](./AGENTS.md) for how to test locally and publish a version.
 
 Installing without `/plugin` (for example, in a managed agent like Cowork): copy `skills/wrap-up/` and `skills/init-project/` into `~/.claude/skills/`. It works standalone because the starter content is inlined into the skill rather than kept in a separate folder.
 
 To change what a freshly-created `_tracker.md` / `_prd.md` / `AGENTS.md` / `CLAUDE.md` looks like, edit Appendices A-D in `skills/wrap-up/SKILL.md` (and nowhere else - `/init-project` reads the same blocks).
 
-> Repository history: created at `tschenkster/claude-code-wrap-up-skill` (2026-05-01), renamed to `claude-code-wrap-up-plugin` (2026-05-12), transferred to the `thomas-schenkelberg` GitHub Org (2026-05-13). GitHub redirects every prior URL automatically — existing installs via any old name keep working. New installs should use `thomas-schenkelberg/claude-code-wrap-up-plugin`.
+> Repository history: created at `tschenkster/claude-code-wrap-up-skill` (2026-05-01), renamed to `claude-code-wrap-up-plugin` (2026-05-12), transferred to the `thomas-schenkelberg` GitHub Org (2026-05-13), marketplace extracted to a dedicated repo `thomas-schenkelberg/marketplace` (2026-05-19). GitHub redirects every prior URL automatically; existing installs that added this repo directly should re-add via the marketplace (see "Migrating from the old install path?" above).
 
 ---
 

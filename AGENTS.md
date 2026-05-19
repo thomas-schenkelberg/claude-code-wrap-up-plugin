@@ -16,7 +16,6 @@ There is no runtime: the skills are plain Markdown that Claude reads and execute
 ## Repository layout
 
 ```
-.claude-plugin/marketplace.json   marketplace catalog (one plugin entry: wrap-up → ./)
 .claude-plugin/plugin.json         plugin manifest — the version number lives here
 skills/wrap-up/SKILL.md            the /wrap-up procedure + Appendices A–D (the four starter file bodies)
 skills/init-project/SKILL.md       the /init-project procedure (reuses wrap-up's Appendices A–D)
@@ -24,15 +23,18 @@ AGENTS.md  CLAUDE.md  _tracker.md  _prd.md   this repo dogfooding its own conven
 README.md  LICENSE  .gitignore
 ```
 
+The marketplace listing that catalogs this plugin lives in a separate repo: [`thomas-schenkelberg/marketplace`](https://github.com/thomas-schenkelberg/marketplace). This repo is a pure plugin source consumed by that marketplace.
+
 The starter content for the four project files is **inlined into `skills/wrap-up/SKILL.md` as Appendices A–D** (no separate `templates/` directory — it was removed in v1.3.0 because a skill can't reliably locate a sibling directory when installed standalone or run by a managed agent). `/init-project` references those same appendices.
 
 ## How to test locally
 
-1. In a scratch project directory, point Claude Code at this repo as a marketplace:
+1. The marketplace lives in a sibling repo. For local development against this plugin, clone `thomas-schenkelberg/marketplace`, point its `.claude-plugin/marketplace.json` plugin entry at this repo via `"source": "/absolute/path/to/claude-code-wrap-up-plugin"`, then add the marketplace as a local path:
    ```
-   /plugin marketplace add /absolute/path/to/claude-code-wrap-up-plugin
+   /plugin marketplace add /absolute/path/to/thomas-schenkelberg-marketplace
    /plugin install wrap-up@thomas-schenkelberg
    ```
+   Don't commit the local-source change to the marketplace repo.
 2. Exercise the skills in a throwaway folder:
    - `/wrap-up` in a bare (non-git) folder → should create `_tracker.md`, `_prd.md`, `AGENTS.md`, `CLAUDE.md` (project name = the folder basename), commit nothing, and print a clean summary.
    - `git init`, then `/init-project` → should prompt for a project name and create the four files; re-running it should report all four "already exists — skipped".
@@ -45,10 +47,11 @@ The starter content for the four project files is **inlined into `skills/wrap-up
 ## How to publish a new version
 
 1. Make the change in `skills/*/SKILL.md` (and the README if behavior changed).
-2. Bump `version` in `.claude-plugin/plugin.json` (semver). Keep `.claude-plugin/marketplace.json`'s description in sync if it changed.
+2. Bump `version` in `.claude-plugin/plugin.json` (semver).
 3. Update `README.md` — especially the "What `/wrap-up` does" list and the behavior table — and add a line to `_tracker.md`.
 4. Commit with the standard Claude Code co-author trailer and push to `main`.
-5. Installed users update with: `/plugin marketplace update thomas-schenkelberg` then `/plugin update wrap-up@thomas-schenkelberg`.
+5. If the plugin's one-line description changed, also update the matching entry in [`thomas-schenkelberg/marketplace`](https://github.com/thomas-schenkelberg/marketplace)'s `.claude-plugin/marketplace.json`.
+6. Installed users update with: `/plugin marketplace update thomas-schenkelberg` then `/plugin update wrap-up@thomas-schenkelberg`.
 
 ## Conventions
 
