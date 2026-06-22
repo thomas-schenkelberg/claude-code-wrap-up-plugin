@@ -100,8 +100,8 @@ To change what a freshly-created `_tracker.md` / `_prd.md` / `AGENTS.md` / `CLAU
 
 ## Author
 
-Built and maintained by **tschenkster - Thomas Schenkelberg** ([LinkedIn](https://www.linkedin.com/in/thomas-schenkelberg/)), a fractional CFO who helps tech companies put AI to work in finance and operations. If this is useful to your team, that's the day job - feel free to reach out.
+Built and maintained by **thomasschenkelberg - Thomas Schenkelberg** ([LinkedIn](https://www.linkedin.com/in/thomas-schenkelberg/)), a fractional CFO who helps tech companies put AI to work in finance and operations. If this is useful to your team, that's the day job - feel free to reach out.
 
 ## License
 
-MIT - see [LICENSE](./LICENSE). Copyright (c) 2026 tschenkster (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/).
+MIT - see [LICENSE](./LICENSE). Copyright (c) 2026 thomasschenkelberg (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/).
