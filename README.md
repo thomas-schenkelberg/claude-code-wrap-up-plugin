@@ -18,7 +18,7 @@ Wrap-Up takes care of the end of the session so you don't have to remember to:
 - **Keep a running log.** A short `_tracker.md` file - *done / next / ideas* - that actually gets maintained. "Where was I?" becomes a ten-second read.
 - **Keep a one-page brief.** A `_prd.md` file - the problem, who it's for, what's in and out of scope - so the project doesn't quietly drift off course.
 - **Give the AI a memory.** Two small instruction files (`AGENTS.md`, `CLAUDE.md`) so the next session - or a colleague, or a different AI tool - starts with context instead of a blank page.
-- **Write down what you learned.** The session is reviewed for anything worth keeping, and the useful bits are saved to Claude Code's own memory.
+- **Write down what you learned.** The session is reviewed for anything worth keeping, the useful bits are saved to Claude Code's own memory, and that memory file is kept from silently overflowing its size limit.
 
 All of that happens when you type one thing: `/wrap-up`.
 

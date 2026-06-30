@@ -90,6 +90,7 @@ If no touched file resolved to a git repo, say "Commit: no git repo was touched 
   - Info that lives in files future sessions will read anyway (`AGENTS.md`, `CLAUDE.md`, `_tracker.md`)
   - Task status or backlog items (those go in `_tracker.md`)
 - **Clean up:** If any existing memories have been resolved by structural fixes (code changes, template updates), delete them.
+- **Keep the memory index from overflowing.** Claude loads `MEMORY.md` into every session but truncates it past ~200 lines or ~25KB, whichever comes first - the tail silently drops, so your newest entries can go invisible. Check it (`wc -lc MEMORY.md`); if it's near either limit, compact it. Recall is index-only (Claude has no semantic search over the topic files), so removing an entry *hides* it - only drop entries already covered by an always-loaded rule, or ones trivially self-re-explaining; never drop name spellings, handles, or behavioral corrections. Past ~190 entries you must cut the entry *count*, not just shorten the hooks. Archive removed entries into a `_archive/` subfolder rather than deleting them.
 - If memory isn't configured or nothing passes the recurrence test, say "Memory: reviewed session — no new learnings to persist" and move on.
 
 ## Step 6: Update CLAUDE.md (mandatory)

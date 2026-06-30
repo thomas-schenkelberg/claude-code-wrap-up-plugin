@@ -16,6 +16,7 @@
 - [x] 2026-05-15: v1.3.1 — fix `plugin.json` schema; `author` now object (was string), required by Claude Code v2.1.142+ install validation
 - [x] 2026-05-15: Rename marketplace `wrap-up` → `thomas-schenkelberg` (install is now `wrap-up@thomas-schenkelberg`); existing users must `marketplace remove wrap-up` + re-add (cache keyed on name)
 - [x] 2026-05-19: Extract marketplace to dedicated repo `thomas-schenkelberg/marketplace`; this repo becomes a pure plugin source. New install path: `marketplace add thomas-schenkelberg/marketplace`. Old direct-repo install path no longer resolves a manifest — migration note added to README.
+- [x] 2026-06-30: v1.4.0 — `/wrap-up` Step 5 adds a MEMORY.md size health check (200-line / 25KB load limit; recall is index-only so prune conservatively; archive don't delete)
 
 ## Next
 
