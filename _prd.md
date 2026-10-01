@@ -16,7 +16,7 @@ End-of-session hygiene is easy to skip: people forget to commit and push, projec
 
 ### In scope
 
-- The `/wrap-up` skill: commit & push touched repos; ensure + update `_tracker.md`, `_prd.md`, `AGENTS.md`; keep an existing `CLAUDE.md` importing `AGENTS.md`; review session for memory writes.
+- The `/wrap-up` skill: ensure + update `_tracker.md`, `_prd.md`, `AGENTS.md`; keep an existing `CLAUDE.md` importing `AGENTS.md`; review session for memory writes; then commit & push touched repos, wrap-up's own doc writes included (commit moved last in v1.5.1).
 - The `/init-project` skill: interactively seed those same three files in a new project; never overwrite.
 - The three starter file bodies (inlined as Appendices A-C in `skills/wrap-up/SKILL.md`).
 - Install / update / uninstall documentation; "works in a single project folder" and "manual install" notes.

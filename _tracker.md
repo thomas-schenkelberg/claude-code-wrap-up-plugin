@@ -19,6 +19,7 @@
 - [x] 2026-06-30: v1.4.0 - `/wrap-up` Step 5 adds a MEMORY.md size health check (200-line / 25KB load limit; recall is index-only so prune conservatively; archive don't delete)
 - [x] 2026-10-01: v1.5.0 - `AGENTS.md` is the one required instruction file; `CLAUDE.md` optional, never auto-created or deleted
 - [x] 2026-10-01: Fold this repo's `CLAUDE.md` into `AGENTS.md` (`## Claude Code`); delete `CLAUDE.md`; em-dash sweep
+- [x] 2026-10-01: v1.5.1 - commit step moved last so wrap-up's own doc writes get committed
 
 ## Next
 

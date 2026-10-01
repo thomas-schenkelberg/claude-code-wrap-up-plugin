@@ -1,50 +1,26 @@
 ---
 name: wrap-up
-description: End-of-session wrap-up. Commits the git repos you touched, ensures _tracker.md, _prd.md, and AGENTS.md exist (auto-creates them from the inline starters in this skill if missing) and updates them, keeps an existing CLAUDE.md pointed at AGENTS.md, and reviews the session for durable memory writes. Invoke explicitly via /wrap-up.
+description: End-of-session wrap-up. Ensures _tracker.md, _prd.md, and AGENTS.md exist (auto-creates them from the inline starters in this skill if missing) and updates them, keeps an existing CLAUDE.md pointed at AGENTS.md, reviews the session for durable memory writes, then commits and pushes the git repos you touched, those doc updates included. Invoke explicitly via /wrap-up.
 disable-model-invocation: true
 ---
 
-End-of-session wrap-up. Run all 6 steps below in order.
+End-of-session wrap-up. Run all 6 steps below in order. The commit comes last on purpose: Steps 1-4 write project files, and Step 6 commits them together with the rest of the session's work, so wrap-up never leaves its own updates uncommitted.
 
-**Mandatory files.** After `/wrap-up` runs, all three of these MUST exist at the project root: `_tracker.md`, `_prd.md`, `AGENTS.md`. Steps 2, 3, and 4 auto-create any that are missing - using the starter content in Appendices A-C at the bottom of this skill - then proceed to update them. They never skip on the grounds that the file is absent.
+**Mandatory files.** After `/wrap-up` runs, all three of these MUST exist at the project root: `_tracker.md`, `_prd.md`, `AGENTS.md`. Steps 1, 2, and 3 auto-create any that are missing - using the starter content in Appendices A-C at the bottom of this skill - then proceed to update them. They never skip on the grounds that the file is absent.
 
-**`AGENTS.md` is the one instruction file.** Claude Code reads it natively (since v2.1.277), and so do Codex, Cursor, Gemini CLI and most other coding agents. Claude-only notes go in its `## Claude Code` section. `CLAUDE.md` is optional: `/wrap-up` never creates one on its own and never deletes one. If the project already has a `CLAUDE.md`, Step 6 keeps it pointed at `AGENTS.md`.
+**`AGENTS.md` is the one instruction file.** Claude Code reads it natively (since v2.1.277), and so do Codex, Cursor, Gemini CLI and most other coding agents. Claude-only notes go in its `## Claude Code` section. `CLAUDE.md` is optional: `/wrap-up` never creates one on its own and never deletes one. If the project already has a `CLAUDE.md`, Step 4 keeps it pointed at `AGENTS.md`.
 
 **Project root** = the output of `git -C . rev-parse --show-toplevel` if the current working directory is inside a git repo; otherwise the current working directory itself.
 
-**One project or many.** This skill only ever touches the project you're currently in - it's fine if that's your only one. If the project is not a git repo, Step 1 commits nothing (that's expected) and Steps 2-6 still run and create/maintain the files.
+**One project or many.** This skill only ever touches the project you're currently in - it's fine if that's your only one. If the project is not a git repo, Steps 1-5 still run and create/maintain the files, and Step 6 commits nothing (that's expected).
 
-## Step 1: Commit and push the git repos touched this session
-
-**Pre-authorized** by invoking `/wrap-up` - do not ask for confirmation.
-
-Do not sweep the whole filesystem. Commit only the repos that were actually touched in this session.
-
-1. **List the files you edited** this session (Write, Edit, migration files written locally, new source folders, etc.). Do NOT include files that were only read.
-2. **Resolve each file's git repo root** with `git -C <dir> rev-parse --show-toplevel 2>/dev/null`. Skip files that error (the path is not inside a git repo - e.g. config writes under `~/.claude/`, files in a non-versioned working directory, files under any cloud-synced directory that isn't a git repo). Collect the unique set of repo roots.
-3. **For each repo in that set:**
-   - `git -C <repo> status` + `git -C <repo> diff` + `git -C <repo> log -1 --oneline` - sanity check.
-   - **Stage only the files YOU edited this session.** Never `git add -A` / `git add .` - a linter or the user may have modified unrelated files and those aren't yours to commit.
-   - **Do NOT stage:** `.env*`, `*.pem`, `*.key`, `credentials.json`, files whose name or content contains `service_role`, `sb_secret_`, `SUPABASE_SERVICE_ROLE_KEY`, `AWS_SECRET_ACCESS_KEY`, or any binary > 10 MB. If a staged file trips this filter on review, `git restore --staged` it and flag to the user.
-   - **Commit via HEREDOC** with a concise message summarising this session's changes to that repo. Include the standard Claude Code co-author trailer:
-     ```
-     Co-Authored-By: Claude <noreply@anthropic.com>
-     ```
-   - `git -C <repo> push` on the current branch. **Never** `--force`, `--no-verify`, or `--no-gpg-sign`.
-
-**On push failure** (protected branch, non-fast-forward, pre-commit hook): stop that repo, report it in the final summary, continue to the next. Do not retry. Do not force-push.
-
-**Never commit:** anything under `~/.claude/`, or files in directories that are not git repos (cloud-sync folders without a `.git`, scratch dirs, etc.).
-
-If no touched file resolved to a git repo, say "Commit: no git repo was touched this session" and move on - the remaining steps still run.
-
-## Step 2: Update Tracker (mandatory)
+## Step 1: Update Tracker (mandatory)
 
 - **Required file: `_tracker.md` at the project root.** If it does not exist, create it now from **Appendix A** below. When seeding:
   - Replace `{{PROJECT_NAME}}` with the basename of the project root.
   - Replace the placeholder date `YYYY-MM-DD` in the seed "Project scaffolding" entry with today's date.
   - Print `_tracker.md: created` and continue with the update steps below.
-- Read `_tracker.md` and review what was done this session (from the commits and git log).
+- Read `_tracker.md` and review what was done this session (from the conversation, `git status` / `git diff`, and any commits already made this session).
 - **Move completed items** from "Next" to "Done" with today's date. **Add new items** discovered this session to "Next" or "Ideas". **Reprioritize "Next"** if the session changed what matters most.
 - **Entry style - match a git commit subject line:** one line, under ~80 characters, imperative or past-tense, no multi-sentence explanations, no "Verified: ..." tails, no architecture context. If it wouldn't fit on `git log --oneline`, it's too long.
   - Good: `- [x] 2026-05-01: Add OAuth login flow to admin app`
@@ -54,7 +30,7 @@ If no touched file resolved to a git repo, say "Commit: no git repo was touched 
 - **Size cap ~100 lines.** Before adding new entries, `wc -l _tracker.md`. If over 100, collapse older multi-line Done entries to one-liners (or fold pure-scaffolding entries into a single "Project scaffolding (YYYY-MM-DD)" line) until back under the cap. Do not delete history - `git log` is the durable record.
 - **Never skip on the grounds that the file is missing** - create it. The only "no update needed" path is when `_tracker.md` already exists AND nothing this session is worth recording. Say "Tracker: no update needed" only in that case.
 
-## Step 3: Update PRD (mandatory)
+## Step 2: Update PRD (mandatory)
 
 - **Required file: `_prd.md` at the project root.** If it does not exist, create it now from **Appendix B** below. When seeding:
   - Replace `{{PROJECT_NAME}}` with the basename of the project root.
@@ -68,7 +44,7 @@ If no touched file resolved to a git repo, say "Commit: no git repo was touched 
   - Version bump warranted
 - **Never skip on the grounds that the file is missing** - create it. For routine bug fixes, style tweaks, or minor refactors, you may say "PRD: no update needed" - but the file must exist after this step.
 
-## Step 4: Update AGENTS.md (mandatory)
+## Step 3: Update AGENTS.md (mandatory)
 
 - **Required file: `AGENTS.md` at the project root.** If it does not exist, create it now from **Appendix C** below, replacing `{{PROJECT_NAME}}` with the basename of the project root. Print `AGENTS.md: created` and continue.
 - Read `AGENTS.md`.
@@ -79,6 +55,15 @@ If no touched file resolved to a git repo, say "Commit: no git repo was touched 
   - A Claude Code-only detail changed (MCP servers, skills, hooks, preferred model) - that goes in its `## Claude Code` section
 - **Never skip on the grounds that the file is missing** - create it. If nothing this session warrants an edit, say "AGENTS.md: no update needed" - but the file must exist after this step.
 - **Will Claude Code actually read it?** On v2.1.277 or later it does, with two exceptions: Claude Code older than 2.1.277, or a `CLAUDE.md`, `CLAUDE.local.md` or `.claude/CLAUDE.md` in a parent folder of the project root (the user's own `~/.claude/CLAUDE.md` doesn't count) - by default any of those makes Claude Code skip `AGENTS.md`. The fix for both is a one-line `CLAUDE.md` at the project root containing `@AGENTS.md`; Claude never reads the file twice. If the project root has no `CLAUDE.md` and you notice either case (`claude --version`, a look at the parent folders), mention it in the summary and offer to create that one-line file. Don't create it unasked.
+
+## Step 4: Check CLAUDE.md (only if the project has one)
+
+- **No `CLAUDE.md` at the project root:** nothing to do (Step 3 already covered the cases where one would help). Say "CLAUDE.md: none (not needed)". Do not create one.
+- **A `CLAUDE.md` exists:** keep it - never delete it, never move its content out on your own. Read it and:
+  - **Make sure it imports `AGENTS.md`.** If no line reads `@AGENTS.md`, add that line right below the first heading. Without it, Claude Code's default setting skips `AGENTS.md` whenever a `CLAUDE.md` is present. Print `CLAUDE.md: added @AGENTS.md import`.
+  - **Drop the outdated claim** "Claude Code reads this file (not `AGENTS.md` directly)" if an earlier version of this plugin's starter put it there (the rest of that note can stay) - it stopped being true with Claude Code v2.1.277.
+  - **Otherwise only edit** it if something it already says changed this session. New project knowledge goes into `AGENTS.md` (Claude-only notes in its `## Claude Code` section), not here. Do NOT duplicate information that already lives in `AGENTS.md`, `_tracker.md`, or memory.
+- If nothing applies, say "CLAUDE.md: no update needed".
 
 ## Step 5: Review Session & Update Memory
 
@@ -97,22 +82,37 @@ If no touched file resolved to a git repo, say "Commit: no git repo was touched 
 - **Keep the memory index from overflowing.** Claude loads `MEMORY.md` into every session but truncates it past ~200 lines or ~25KB, whichever comes first - the tail silently drops, so your newest entries can go invisible. Check it (`wc -lc MEMORY.md`); if it's near either limit, compact it. Recall is index-only (Claude has no semantic search over the topic files), so removing an entry *hides* it - only drop entries already covered by an always-loaded rule, or ones trivially self-re-explaining; never drop name spellings, handles, or behavioral corrections. Past ~190 entries you must cut the entry *count*, not just shorten the hooks. Archive removed entries into a `_archive/` subfolder rather than deleting them.
 - If memory isn't configured or nothing passes the recurrence test, say "Memory: reviewed session - no new learnings to persist" and move on.
 
-## Step 6: Check CLAUDE.md (only if the project has one)
+## Step 6: Commit and push the git repos touched this session
 
-- **No `CLAUDE.md` at the project root:** nothing to do (Step 4 already covered the cases where one would help). Say "CLAUDE.md: none (not needed)". Do not create one.
-- **A `CLAUDE.md` exists:** keep it - never delete it, never move its content out on your own. Read it and:
-  - **Make sure it imports `AGENTS.md`.** If no line reads `@AGENTS.md`, add that line right below the first heading. Without it, Claude Code's default setting skips `AGENTS.md` whenever a `CLAUDE.md` is present. Print `CLAUDE.md: added @AGENTS.md import`.
-  - **Drop the outdated claim** "Claude Code reads this file (not `AGENTS.md` directly)" if an earlier version of this plugin's starter put it there (the rest of that note can stay) - it stopped being true with Claude Code v2.1.277.
-  - **Otherwise only edit** it if something it already says changed this session. New project knowledge goes into `AGENTS.md` (Claude-only notes in its `## Claude Code` section), not here. Do NOT duplicate information that already lives in `AGENTS.md`, `_tracker.md`, or memory.
-- If nothing applies, say "CLAUDE.md: no update needed".
+**Pre-authorized** by invoking `/wrap-up` - do not ask for confirmation.
+
+Do not sweep the whole filesystem. Commit only the repos that were actually touched in this session.
+
+1. **List the files you edited** this session (Write, Edit, migration files written locally, new source folders, etc.), **including every file wrap-up itself created or edited in Steps 1-4** (`_tracker.md`, `_prd.md`, `AGENTS.md`, `CLAUDE.md`). Those doc updates ship in the same commit as the session's work and are never left dirty: a later session would not count them as its own edits, so nothing else would ever commit them. Do NOT include files that were only read.
+2. **Resolve each file's git repo root** with `git -C <dir> rev-parse --show-toplevel 2>/dev/null`. Skip files that error (the path is not inside a git repo - e.g. config writes under `~/.claude/`, files in a non-versioned working directory, files under any cloud-synced directory that isn't a git repo). Collect the unique set of repo roots.
+3. **For each repo in that set:**
+   - `git -C <repo> status` + `git -C <repo> diff` + `git -C <repo> log -1 --oneline` - sanity check.
+   - **Stage only the files YOU edited this session** (wrap-up's own doc writes from Steps 1-4 included). Never `git add -A` / `git add .` - a linter or the user may have modified unrelated files and those aren't yours to commit.
+   - **Do NOT stage:** `.env*`, `*.pem`, `*.key`, `credentials.json`, files whose name or content contains `service_role`, `sb_secret_`, `SUPABASE_SERVICE_ROLE_KEY`, `AWS_SECRET_ACCESS_KEY`, or any binary > 10 MB. If a staged file trips this filter on review, `git restore --staged` it and flag to the user.
+   - **Commit via HEREDOC** with a concise message summarising this session's changes to that repo. Include the standard Claude Code co-author trailer:
+     ```
+     Co-Authored-By: Claude <noreply@anthropic.com>
+     ```
+   - `git -C <repo> push` on the current branch. **Never** `--force`, `--no-verify`, or `--no-gpg-sign`.
+
+**On push failure** (protected branch, non-fast-forward, pre-commit hook): stop that repo, report it in the final summary, continue to the next. Do not retry. Do not force-push.
+
+**Never commit:** anything under `~/.claude/`, or files in directories that are not git repos (cloud-sync folders without a `.git`, scratch dirs, etc.).
+
+If no touched file resolved to a git repo, say "Commit: no git repo was touched this session" - the files from Steps 1-4 still exist on disk, they just aren't versioned.
 
 ## Summary
 
 After all steps, give a brief summary:
-- What was committed and pushed per touched repo (or that no git repo was touched)
 - For each of `_tracker.md`, `_prd.md`, `AGENTS.md`: created / updated (and why) / no update needed
-- `CLAUDE.md`: none / import added / updated / no update needed - plus the one-line-`CLAUDE.md` offer from Step 4 if it applies
+- `CLAUDE.md`: none / import added / updated / no update needed - plus the one-line-`CLAUDE.md` offer from Step 3 if it applies
 - Memory: what was written, or that nothing passed the recurrence test
+- What was committed and pushed per touched repo, wrap-up's own doc updates included (or that no git repo was touched)
 
 ---
 
@@ -120,7 +120,7 @@ Each appendix below uses a **4-backtick fence** so that any 3-backtick code bloc
 
 ## Appendix A - starter `_tracker.md`
 
-> Canonical starter content. `/init-project` uses this same block. When creating the file, substitute `{{PROJECT_NAME}}` and `YYYY-MM-DD` as described in Step 2.
+> Canonical starter content. `/init-project` uses this same block. When creating the file, substitute `{{PROJECT_NAME}}` and `YYYY-MM-DD` as described in Step 1.
 
 ````markdown
 # Tracker: {{PROJECT_NAME}}

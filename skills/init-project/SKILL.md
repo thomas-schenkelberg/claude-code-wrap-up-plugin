@@ -48,7 +48,7 @@ For `_tracker.md` specifically, also replace the placeholder date `YYYY-MM-DD` i
 After all three files are processed, print:
 
 - A summary list (which were created, which were skipped).
-- A reminder: "Run `/wrap-up` at the end of each working session. It commits the repos you touched, then keeps these files current."
+- A reminder: "Run `/wrap-up` at the end of each working session. It keeps these files current, then commits and pushes the repos you touched, those updates included."
 - If `git status` shows the project root is not a git repo, say: "Tip: this directory is not a git repo. Run `git init` if you want `/wrap-up` to commit your work automatically." (Not required - `/wrap-up`'s file-maintenance steps run either way.)
 - If there is no `CLAUDE.md` at the project root, add one line: "Claude Code reads `AGENTS.md` on its own from v2.1.277. On an older version, or if a `CLAUDE.md` sits in a parent folder, ask me to add a one-line `CLAUDE.md` containing `@AGENTS.md`."
 

@@ -8,7 +8,7 @@
 
 A **Claude Code plugin** named `wrap-up`, published to GitHub and installable via the Claude Code plugin/marketplace system. The plugin bundles **two skills** (each a `/<name>` slash command):
 
-- **`/wrap-up`** - end-of-session routine: commit & push the git repos you touched, then ensure and update the three project files (`_tracker.md`, `_prd.md`, `AGENTS.md`), keep an existing `CLAUDE.md` pointed at `AGENTS.md`, then review the session for memory writes.
+- **`/wrap-up`** - end-of-session routine: ensure and update the three project files (`_tracker.md`, `_prd.md`, `AGENTS.md`), keep an existing `CLAUDE.md` pointed at `AGENTS.md`, review the session for memory writes, then commit & push the git repos you touched. The commit is last so it carries wrap-up's own doc writes (since v1.5.1).
 - **`/init-project`** - bootstrap a new project with those same three files, interactively (asks for a project name). Never overwrites, never creates a `CLAUDE.md`.
 
 There is no runtime: the skills are plain Markdown that Claude reads and executes as a procedure. No JavaScript, no hooks, no MCP server.
@@ -45,6 +45,7 @@ The starter content for the three project files is **inlined into `skills/wrap-u
 2. Exercise the skills in a throwaway folder:
    - `/wrap-up` in a bare (non-git) folder -> should create `_tracker.md`, `_prd.md`, `AGENTS.md` (project name = the folder basename), create no `CLAUDE.md`, commit nothing, and print a clean summary.
    - `/wrap-up` in a folder whose `CLAUDE.md` has no `@AGENTS.md` line -> should add that line and leave the rest of the file alone.
+   - `/wrap-up` in a git repo with a remote -> the pushed commit should contain the `_tracker.md` / `_prd.md` / `AGENTS.md` changes it made, and `git status` should show none of them as modified afterwards.
    - `git init`, then `/init-project` -> should prompt for a project name and create the three files; re-running it should report all three "already exists - skipped".
 3. Uninstall when done:
    ```

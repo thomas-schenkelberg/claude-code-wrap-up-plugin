@@ -14,7 +14,7 @@ You work with Claude Code for an hour, you get somewhere good, you close the lap
 
 Wrap-Up takes care of the end of the session so you don't have to remember to:
 
-- **Save your work.** `/wrap-up` commits and pushes whatever you changed, with sensible guardrails: it only touches the files you actually edited, it skips anything that looks like a password or key, and it never rewrites history.
+- **Save your work.** `/wrap-up` commits and pushes whatever you changed, including the three status files below that it just brought up to date, with sensible guardrails: it only touches the files you and the wrap-up actually edited, it skips anything that looks like a password or key, and it never rewrites history.
 - **Keep a running log.** A short `_tracker.md` file - *done / next / ideas* - that actually gets maintained. "Where was I?" becomes a ten-second read.
 - **Keep a one-page brief.** A `_prd.md` file - the problem, who it's for, what's in and out of scope - so the project doesn't quietly drift off course.
 - **Give the AI a memory.** One small instruction file, `AGENTS.md`, so the next session - or a colleague, or a different AI tool - starts with context instead of a blank page. Claude Code reads it on its own, and so do most other AI coding tools.
@@ -52,7 +52,7 @@ To remove it: `/plugin uninstall wrap-up@thomas-schenkelberg` then `/plugin mark
 
 **When you start a new project:** run `/init-project` once. It asks you for a project name, then creates the three files described below (and skips any you already have). Setup takes a minute.
 
-**At the end of every session:** run `/wrap-up`. Claude saves your work and brings the three files up to date. You don't have to approve each step - running the command is your go-ahead. If your Claude Code is set up to ask before things like pushing to GitHub, you'll still get that prompt; the plugin doesn't bypass it.
+**At the end of every session:** run `/wrap-up`. Claude brings the three files up to date, then saves your work, those updates included. You don't have to approve each step - running the command is your go-ahead. If your Claude Code is set up to ask before things like pushing to GitHub, you'll still get that prompt; the plugin doesn't bypass it.
 
 If you skip `/init-project` and just use `/wrap-up`, that's fine - the first time, it creates the three files for you and uses the folder name as the project name. You can edit that afterward.
 

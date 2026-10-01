@@ -1,7 +1,7 @@
 {
   "name": "wrap-up",
-  "version": "1.5.0",
-  "description": "Claude Code plugin bundling two skills. /wrap-up ends a session: commits touched repos, then ensures and updates the three project files (_tracker.md, _prd.md, AGENTS.md - all mandatory, auto-created from inline starters if missing), keeps an existing CLAUDE.md importing AGENTS.md (never creates or deletes one), then reviews the session for memory writes. /init-project seeds those same three files interactively at project start. Self-contained, plain Markdown, no runtime.",
+  "version": "1.5.1",
+  "description": "Claude Code plugin bundling two skills. /wrap-up ends a session: ensures and updates the three project files (_tracker.md, _prd.md, AGENTS.md - all mandatory, auto-created from inline starters if missing), keeps an existing CLAUDE.md importing AGENTS.md (never creates or deletes one), reviews the session for memory writes, then commits and pushes the touched repos, those doc updates included. /init-project seeds those same three files interactively at project start. Self-contained, plain Markdown, no runtime.",
   "author": {
     "name": "thomasschenkelberg (Thomas Schenkelberg | https://www.linkedin.com/in/thomas-schenkelberg/)",
     "url": "https://www.linkedin.com/in/thomas-schenkelberg/"
