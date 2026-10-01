@@ -71,6 +71,6 @@ The starter content for the three project files is **inlined into `skills/wrap-u
 
 ## Claude Code
 
-- Run `/wrap-up` at the end of a session here - this repo eats its own dog food.
+- End a session here with `/wrap-up`, or with any end-of-session routine that maintains `_tracker.md`, `_prd.md` and `AGENTS.md` the same way - this repo eats its own dog food.
 - Any behavior change to a skill goes through the full "How to publish a new version" list (version bump, README, `_tracker.md`), even a small one.
 - Preferred model: whatever the user is on; nothing in this repo needs a specific model.
